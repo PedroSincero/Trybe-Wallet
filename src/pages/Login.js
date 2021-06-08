@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import saveUser from '../actions';
 
 class Login extends React.Component {
@@ -91,4 +92,4 @@ Login.propTypes = {
 
 export default connect(null, mapDispatchToProps)(Login);
 
-// Agradecimentos A Alessandra Razende  Turma 10 Tribo b - e ao Instrutor Eduardo Santos ,
+// Agradecimentos A Alessandra Razende  Turma 10 Tribo b - e ao Instrutor Eduardo Santos , Raphael Gumieri Turma 10 Tribo B - Lucas Martins Turma 10 Tribo B
