@@ -1,5 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import saveUser from '../actions';
 
 class Login extends React.Component {
   constructor() {
@@ -40,6 +42,7 @@ class Login extends React.Component {
 
   render() {
     const { email, password, validPassword, validEmail } = this.state;
+    const { saveEmail } = this.props;
     return (
       <form>
         <h1>Login</h1>
@@ -67,6 +70,7 @@ class Login extends React.Component {
           <button
             type="button"
             disabled={ !validEmail || !validPassword }
+            onClick={ () => saveEmail(email) }
           >
             Entrar
           </button>
@@ -77,9 +81,14 @@ class Login extends React.Component {
   }
 }
 
-// const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (dispatch) => ({
+  saveEmail: (email) => dispatch(saveUser(email)),
+});
 
-// });
-export default Login;
+Login.propTypes = {
+  saveEmail: PropTypes.func.isRequired,
+};
 
-// Agradecimentos A Alessandra Razende  Turma 10 Tribo b - e ao Instrutor Eduardo Santos
+export default connect(null, mapDispatchToProps)(Login);
+
+// Agradecimentos A Alessandra Razende  Turma 10 Tribo b - e ao Instrutor Eduardo Santos ,

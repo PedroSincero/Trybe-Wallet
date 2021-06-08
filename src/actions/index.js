@@ -1,7 +1,7 @@
 // Coloque aqui suas actions
 const saveUser = (email) => ({
   type: 'EMAIL',
-  user: {
+  payload: {
     email,
   },
 });
