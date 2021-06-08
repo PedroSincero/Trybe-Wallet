@@ -11,8 +11,9 @@ class Login extends React.Component {
       validEmail: false,
       validPassword: false,
     };
+
     this.handleValidEmail = this.handleValidEmail.bind(this);
-    this.handleValidPassword = this.handleValidPassword(this);
+    this.handleValidPassword = this.handleValidPassword.bind(this);
   }
 
   handleValidEmail(event) {
