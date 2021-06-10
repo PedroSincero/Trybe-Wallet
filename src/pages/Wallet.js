@@ -10,7 +10,7 @@ class Wallet extends React.Component {
   render() {
     const { saveEmail, sumField, sumValue } = this.props;
     // console.log(sumField);
-    console.log(sumValue);
+    // console.log(sumValue);
     return (
       <div>
         <header>
@@ -19,7 +19,7 @@ class Wallet extends React.Component {
           </div>
           <div data-testid="total-field">
             {/* {sumField.map((teste) => (Number(teste.value) + Number(teste.total))) } */}
-            {sumField.reduce((acc, index) => console.log(index.exchangeRates[index.coin].ask) || acc + (index.exchangeRates[index][index.coin].ask * index.value), 0)}
+            {sumField.reduce((acc, index) => acc + (index.exchangeRates.find((e) => e.code === index.coin).ask * index.value), 0)}
           </div>
           <div data-testid="header-currency-field">
             BRL
