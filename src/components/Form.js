@@ -15,6 +15,7 @@ class Form extends React.Component {
       tag: 'food',
     };
     this.saveInformation = this.saveInformation.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
@@ -29,8 +30,18 @@ class Form extends React.Component {
     });
   }
 
+  handleClick() {
+    const { saving } = this.props;
+    saving(this.state);
+    const { id } = this.state;
+    this.setState((oldstate) => ({
+      ...oldstate,
+      id: id + 1,
+    }));
+  }
+
   render() {
-    const { getWalletAPI, isLoading, saving } = this.props;
+    const { getWalletAPI, isLoading } = this.props;
     const { value, description, coin, payment, tag } = this.state;
     return (
       <form>
@@ -72,7 +83,7 @@ class Form extends React.Component {
         </label>
         <button
           type="button"
-          onClick={ () => saving(this.state) }
+          onClick={ () => this.handleClick() }
         >
           Adicionar despesa
         </button>
@@ -99,4 +110,4 @@ Form.propTypes = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
-// Agradecimento ao Denis Turma 10 Tribo B
+// Agradecimento ao Denis Turma 10 Tribo B, Alan Tanaka Turma 10 Tribo B
