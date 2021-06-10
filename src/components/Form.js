@@ -13,9 +13,12 @@ class Form extends React.Component {
       coin: 'USD',
       payment: 'cash',
       tag: 'food',
+      exchangeRates: {},
+      // total: 0,
     };
     this.saveInformation = this.saveInformation.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    // this.somaTotal = this.somaTotals.bind(this);
   }
 
   componentDidMount() {
@@ -23,16 +26,34 @@ class Form extends React.Component {
     infoAPI();
   }
 
+  // somaTotal() {
+  //   this.setState((oldstate) => ({
+  //     ...oldstate,
+
+  //   }));
+  // }
+
   saveInformation(event) {
     const { target: { value, id } } = event;
+    // if (id === 'coin') {
+    //   // const { value, total } = this.state;
+    //   console.log('oi bobao');
+    //   this.setState({
+    //     [id]: value,
+    //     total: total + value,
+    //   });
+    // }
     this.setState({
       [id]: value,
     });
   }
 
   handleClick() {
-    const { saving } = this.props;
-    saving(this.state);
+    const { saving, getWalletAPI } = this.props;
+    this.setState({
+      exchangeRates: getWalletAPI,
+    }, () => saving(this.state));
+
     const { id } = this.state;
     this.setState((oldstate) => ({
       ...oldstate,
