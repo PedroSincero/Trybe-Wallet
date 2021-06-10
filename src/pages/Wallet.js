@@ -16,10 +16,7 @@ class Wallet extends React.Component {
             0
           </div>
           <div data-testid="header-currency-field">
-            - Um elemento que exiba o email do usuário que fez login.
-            - Crie um campo com a despesa total gerada pela lista de gastos.
-            - Crie um campo que mostre que qual câmbio está sendo utilizado,
-            que será neste caso BRL
+            BRL
           </div>
         </header>
         <Form />

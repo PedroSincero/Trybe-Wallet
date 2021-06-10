@@ -1,11 +1,12 @@
-export const walletAPI = (data) => ({
+export const walletAPI = (curries) => ({
   type: 'CURRENCIES',
   wallet: {
-    currencies: Object.values(data),
-    expenses: [],
+    currencies: Object.values(curries),
     loading: false,
   },
 });
+
+export const saveInStore = (expenses) => ({ type: 'EXPENSES', expenses });
 
 export const requestAPI = () => ({ type: 'REQUEST_API', loading: true });
 

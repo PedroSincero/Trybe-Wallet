@@ -18,6 +18,10 @@ function wallet(state = INITIAL_STATE, action) {
       loading: action.loading,
     };
 
+  case 'EXPENSES':
+    return { ...state,
+      expenses: [...state.expenses, action.expenses],
+    };
   default:
     return state;
   }
