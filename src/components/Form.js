@@ -15,7 +15,7 @@ class Form extends React.Component {
       tag: '',
       exchangeRates: '',
     };
-    this.saveInformation = this.saveInformation.bind(this);
+    this.saveInfo = this.saveInfo.bind(this);
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -24,7 +24,7 @@ class Form extends React.Component {
     infoAPI();
   }
 
-  saveInformation(event) {
+  saveInfo(event) {
     const { target: { value, id } } = event;
     this.setState({
       [id]: value,
@@ -47,6 +47,21 @@ class Form extends React.Component {
     }));
   }
 
+  select() {
+    return (
+      <label htmlFor="tag">
+        Tag
+        <select id="tag" value={ tag } onChange={ (e) => this.saveInfo(e) }>
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
+        </select>
+      </label>
+    );
+  }
+
   render() {
     const { getWalletAPI, isLoading } = this.props;
     const { value, description, currency, method, tag } = this.state;
@@ -54,15 +69,15 @@ class Form extends React.Component {
       <form>
         <label htmlFor="value">
           Valor
-          <input type="number" id="value" value={ value } onChange={ (e) => this.saveInformation(e) } />
+          <input type="number" id="value" value={ value } onChange={ (e) => this.saveInfo(e) } />
         </label>
         <label htmlFor="description">
           Descrição
-          <input type="text" id="description" value={ description } onChange={ (e) => this.saveInformation(e) } />
+          <input type="text" id="description" value={ description } onChange={ (e) => this.saveInfo(e) } />
         </label>
         <label htmlFor="currency">
           Moeda
-          <select id="currency" value={ currency } onChange={ (e) => this.saveInformation(e) }>
+          <select id="currency" value={ currency } onChange={ (e) => this.saveInfo(e) }>
             {!isLoading && Object.entries(getWalletAPI[0])
               .filter((code) => code[1].codein !== 'BRLT')
               .map((opCoin, index) => (
@@ -72,7 +87,7 @@ class Form extends React.Component {
         </label>
         <label htmlFor="method">
           Método de pagamento
-          <select id="method" value={ method } onChange={ (e) => this.saveInformation(e) }>
+          <select id="method" value={ method } onChange={ (e) => this.saveInfo(e) }>
             <option value="Dinheiro">Dinheiro</option>
             <option value="Cartão de crédito">Cartão de crédito</option>
             <option value="Cartão de débito">Cartão de débito</option>
@@ -80,7 +95,7 @@ class Form extends React.Component {
         </label>
         <label htmlFor="tag">
           Tag
-          <select id="tag" value={ tag } onChange={ (e) => this.saveInformation(e) }>
+          <select id="tag" value={ tag } onChange={ (e) => this.saveInfo(e) }>
             <option value="Alimentação">Alimentação</option>
             <option value="Lazer">Lazer</option>
             <option value="Trabalho">Trabalho</option>
