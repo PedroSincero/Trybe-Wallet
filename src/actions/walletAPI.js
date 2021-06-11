@@ -1,7 +1,7 @@
 export const walletAPI = (curries) => ({
   type: 'CURRENCIES',
   wallet: {
-    currencies: Object.values(curries),
+    currencies: curries,
     loading: false,
   },
 });

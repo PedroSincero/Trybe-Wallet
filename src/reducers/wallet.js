@@ -14,7 +14,7 @@ function wallet(state = INITIAL_STATE, action) {
 
   case 'CURRENCIES':
     return { ...state,
-      currencies: action.wallet.currencies,
+      currencies: [...state.currencies, action.wallet.currencies],
       loading: action.loading,
     };
 

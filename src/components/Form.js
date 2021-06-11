@@ -7,18 +7,16 @@ class Form extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 0,
+      id: -1,
       value: '',
       description: '',
-      coin: 'USD',
-      payment: 'cash',
-      tag: 'food',
-      exchangeRates: {},
-      // total: 0,
+      currency: 'USD',
+      method: '',
+      tag: '',
+      exchangeRates: '',
     };
     this.saveInformation = this.saveInformation.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    // this.somaTotal = this.somaTotals.bind(this);
   }
 
   componentDidMount() {
@@ -26,32 +24,20 @@ class Form extends React.Component {
     infoAPI();
   }
 
-  // somaTotal() {
-  //   this.setState((oldstate) => ({
-  //     ...oldstate,
-
-  //   }));
-  // }
-
   saveInformation(event) {
     const { target: { value, id } } = event;
-    // if (id === 'coin') {
-    //   // const { value, total } = this.state;
-    //   console.log('oi bobao');
-    //   this.setState({
-    //     [id]: value,
-    //     total: total + value,
-    //   });
-    // }
     this.setState({
       [id]: value,
     });
   }
 
   handleClick() {
+    const { infoAPI } = this.props;
+    infoAPI();
     const { saving, getWalletAPI } = this.props;
+    console.log(getWalletAPI[0]);
     this.setState({
-      exchangeRates: getWalletAPI,
+      exchangeRates: getWalletAPI[0],
     }, () => saving(this.state));
 
     const { id } = this.state;
@@ -63,7 +49,7 @@ class Form extends React.Component {
 
   render() {
     const { getWalletAPI, isLoading } = this.props;
-    const { value, description, coin, payment, tag } = this.state;
+    const { value, description, currency, method, tag } = this.state;
     return (
       <form>
         <label htmlFor="value">
@@ -74,32 +60,32 @@ class Form extends React.Component {
           Descrição
           <input type="text" id="description" value={ description } onChange={ (e) => this.saveInformation(e) } />
         </label>
-        <label htmlFor="coin">
+        <label htmlFor="currency">
           Moeda
-          <select id="coin" value={ coin } onChange={ (e) => this.saveInformation(e) }>
-            {!isLoading && getWalletAPI
-              .filter((code) => code.codein !== 'BRLT')
+          <select id="currency" value={ currency } onChange={ (e) => this.saveInformation(e) }>
+            {!isLoading && Object.entries(getWalletAPI[0])
+              .filter((code) => code[1].codein !== 'BRLT')
               .map((opCoin, index) => (
-                <option value={ opCoin.code } key={ index }>{opCoin.code}</option>
+                <option value={ opCoin[1].code } key={ index }>{opCoin[1].code}</option>
               ))}
           </select>
         </label>
-        <label htmlFor="payment">
+        <label htmlFor="method">
           Método de pagamento
-          <select id="payment" value={ payment } onChange={ (e) => this.saveInformation(e) }>
-            <option value="cash">Dinheiro</option>
-            <option value="credit-card">Cartão de crédito</option>
-            <option value="debit-card">Cartão de débito</option>
+          <select id="method" value={ method } onChange={ (e) => this.saveInformation(e) }>
+            <option value="Dinheiro">Dinheiro</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="tag">
           Tag
           <select id="tag" value={ tag } onChange={ (e) => this.saveInformation(e) }>
-            <option value="food">Alimentação</option>
-            <option value="leisure">Lazer</option>
-            <option value="work">Trabalho</option>
-            <option value="transport">Transporte</option>
-            <option value="health">Saúde</option>
+            <option value="Alimentação">Alimentação</option>
+            <option value="Lazer">Lazer</option>
+            <option value="Trabalho">Trabalho</option>
+            <option value="Transporte">Transporte</option>
+            <option value="Saúde">Saúde</option>
           </select>
         </label>
         <button
@@ -131,4 +117,4 @@ Form.propTypes = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
 
-// Agradecimento ao Denis Turma 10 Tribo B, Alan Tanaka Turma 10 Tribo B
+// Agradecimento ao Denis Turma 10 Tribo B, Alan Tanaka Turma 10 Tribo B, Jeferson Andrade Turma 10 Tribo B
