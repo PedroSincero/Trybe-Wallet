@@ -13,7 +13,11 @@ class Wallet extends React.Component {
             {saveEmail}
           </div>
           <div data-testid="total-field">
-            {sumField.reduce((acc, index) => acc + (index.exchangeRates[index.currency].ask * index.value), 0)}
+            {sumField
+              .reduce(
+                (acc, index) => acc
+                + (index.exchangeRates[index.currency].ask * index.value), 0,
+              )}
           </div>
           <div data-testid="header-currency-field">
             BRL
@@ -33,6 +37,7 @@ const mapStateToProps = (state) => ({
 
 Wallet.propTypes = {
   saveEmail: PropTypes.func.isRequired,
+  sumField: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, null)(Wallet);

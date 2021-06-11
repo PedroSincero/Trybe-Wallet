@@ -17,6 +17,8 @@ class Form extends React.Component {
     };
     this.saveInfo = this.saveInfo.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.select = this.select.bind(this);
+    this.select2 = this.select2.bind(this);
   }
 
   componentDidMount() {
@@ -48,32 +50,52 @@ class Form extends React.Component {
   }
 
   select() {
+    const { tag } = this.state;
     return (
-      <label htmlFor="tag">
-        Tag
-        <select id="tag" value={ tag } onChange={ (e) => this.saveInfo(e) }>
-          <option value="Alimentação">Alimentação</option>
-          <option value="Lazer">Lazer</option>
-          <option value="Trabalho">Trabalho</option>
-          <option value="Transporte">Transporte</option>
-          <option value="Saúde">Saúde</option>
-        </select>
-      </label>
+      <select id="tag" value={ tag } onChange={ (e) => this.saveInfo(e) }>
+        <option value="Alimentação">Alimentação</option>
+        <option value="Lazer">Lazer</option>
+        <option value="Trabalho">Trabalho</option>
+        <option value="Transporte">Transporte</option>
+        <option value="Saúde">Saúde</option>
+      </select>
+
+    );
+  }
+
+  select2() {
+    const { method } = this.state;
+    return (
+      <select id="method" value={ method } onChange={ (e) => this.saveInfo(e) }>
+        <option value="Dinheiro">Dinheiro</option>
+        <option value="Cartão de crédito">Cartão de crédito</option>
+        <option value="Cartão de débito">Cartão de débito</option>
+      </select>
     );
   }
 
   render() {
     const { getWalletAPI, isLoading } = this.props;
-    const { value, description, currency, method, tag } = this.state;
+    const { value, description, currency } = this.state;
     return (
       <form>
         <label htmlFor="value">
           Valor
-          <input type="number" id="value" value={ value } onChange={ (e) => this.saveInfo(e) } />
+          <input
+            type="number"
+            id="value"
+            value={ value }
+            onChange={ (e) => this.saveInfo(e) }
+          />
         </label>
         <label htmlFor="description">
           Descrição
-          <input type="text" id="description" value={ description } onChange={ (e) => this.saveInfo(e) } />
+          <input
+            type="text"
+            id="description"
+            value={ description }
+            onChange={ (e) => this.saveInfo(e) }
+          />
         </label>
         <label htmlFor="currency">
           Moeda
@@ -87,21 +109,11 @@ class Form extends React.Component {
         </label>
         <label htmlFor="method">
           Método de pagamento
-          <select id="method" value={ method } onChange={ (e) => this.saveInfo(e) }>
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-          </select>
+          {this.select2()}
         </label>
         <label htmlFor="tag">
           Tag
-          <select id="tag" value={ tag } onChange={ (e) => this.saveInfo(e) }>
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
+          {this.select()}
         </label>
         <button
           type="button"
@@ -128,6 +140,7 @@ Form.propTypes = {
   isLoading: PropTypes.bool.isRequired,
   getWalletAPI: PropTypes.arrayOf.isRequired,
   infoAPI: PropTypes.func.isRequired,
+  saving: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Form);
