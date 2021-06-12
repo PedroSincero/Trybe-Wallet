@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchAPI, saveInStore } from '../actions/walletAPI';
+import Button from './Buttons';
 
 class Form extends React.Component {
   constructor(props) {
@@ -37,7 +38,6 @@ class Form extends React.Component {
     const { infoAPI } = this.props;
     infoAPI();
     const { saving, getWalletAPI } = this.props;
-    console.log(getWalletAPI[0]);
     this.setState({
       exchangeRates: getWalletAPI[0],
     }, () => saving(this.state));
@@ -115,17 +115,18 @@ class Form extends React.Component {
           Tag
           {this.select()}
         </label>
-        <button
-          type="button"
-          onClick={ () => this.handleClick() }
-        >
-          Adicionar despesa
-        </button>
+        <Button handleClick={ this.handleClick } />
       </form>
     );
   }
 }
 
+{ /* <button
+type="button"
+onClick={ () => this.handleClick() }
+>
+Adicionar despesa
+</button> */ }
 const mapStateToProps = (state) => ({
   getWalletAPI: state.wallet.currencies,
   isLoading: state.wallet.loading,

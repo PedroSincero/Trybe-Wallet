@@ -24,6 +24,7 @@ class Wallet extends React.Component {
           </div>
         </header>
         <Form />
+        {/* <Buttons pessoal={ () => console.log('pessoas incriveis') } /> */}
       </div>
     );
   }
@@ -32,7 +33,6 @@ class Wallet extends React.Component {
 const mapStateToProps = (state) => ({
   saveEmail: state.user.email,
   sumField: state.wallet.expenses,
-  // sumValue: state.wallet.expenses.exchangeRates,
 });
 
 Wallet.propTypes = {
