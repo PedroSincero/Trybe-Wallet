@@ -18,8 +18,8 @@ class Form extends React.Component {
     };
     this.saveInfo = this.saveInfo.bind(this);
     this.handleClick = this.handleClick.bind(this);
-    this.select = this.select.bind(this);
-    this.select2 = this.select2.bind(this);
+    this.selectTag = this.selectTag.bind(this);
+    this.selectMethod = this.selectMethod.bind(this);
   }
 
   componentDidMount() {
@@ -37,6 +37,7 @@ class Form extends React.Component {
   handleClick() {
     const { infoAPI } = this.props;
     infoAPI();
+
     const { saving, getWalletAPI } = this.props;
     this.setState({
       exchangeRates: getWalletAPI[0],
@@ -49,7 +50,7 @@ class Form extends React.Component {
     }));
   }
 
-  select() {
+  selectTag() {
     const { tag } = this.state;
     return (
       <select id="tag" value={ tag } onChange={ (e) => this.saveInfo(e) }>
@@ -63,7 +64,7 @@ class Form extends React.Component {
     );
   }
 
-  select2() {
+  selectMethod() {
     const { method } = this.state;
     return (
       <select id="method" value={ method } onChange={ (e) => this.saveInfo(e) }>
@@ -109,11 +110,11 @@ class Form extends React.Component {
         </label>
         <label htmlFor="method">
           Método de pagamento
-          {this.select2()}
+          {this.selectMethod()}
         </label>
         <label htmlFor="tag">
           Tag
-          {this.select()}
+          {this.selectTag()}
         </label>
         <Button handleClick={ this.handleClick } />
       </form>

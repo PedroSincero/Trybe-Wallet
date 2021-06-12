@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Form from '../components/Form';
+import ExpensesTable from '../components/ExpensesTable';
 
 class Wallet extends React.Component {
   render() {
@@ -13,18 +14,22 @@ class Wallet extends React.Component {
             {saveEmail}
           </div>
           <div data-testid="total-field">
-            {sumField
-              .reduce(
-                (acc, index) => acc
+            <p>
+              Total:
+              {sumField
+                .reduce(
+                  (acc, index) => acc
                 + (index.exchangeRates[index.currency].ask * index.value), 0,
-              )}
+                )}
+            </p>
+
           </div>
           <div data-testid="header-currency-field">
             BRL
           </div>
         </header>
         <Form />
-        {/* <Buttons pessoal={ () => console.log('pessoas incriveis') } /> */}
+        <ExpensesTable />
       </div>
     );
   }
