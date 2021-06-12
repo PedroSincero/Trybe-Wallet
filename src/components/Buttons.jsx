@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Button({ handleClick }) {
   return (
@@ -7,3 +8,7 @@ export default function Button({ handleClick }) {
     </button>
   );
 }
+
+Button.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+};

@@ -121,12 +121,6 @@ class Form extends React.Component {
   }
 }
 
-{ /* <button
-type="button"
-onClick={ () => this.handleClick() }
->
-Adicionar despesa
-</button> */ }
 const mapStateToProps = (state) => ({
   getWalletAPI: state.wallet.currencies,
   isLoading: state.wallet.loading,
