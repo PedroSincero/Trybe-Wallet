@@ -22,5 +22,3 @@ export function fetchAPI() {
     }
   };
 }
-
-// export default walletAPI;

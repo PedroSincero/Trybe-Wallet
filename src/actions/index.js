@@ -6,4 +6,5 @@ const saveUser = (email) => ({
   },
 });
 
+export const deleteExpense = (id) => ({ type: 'DELETE', id });
 export default saveUser;
